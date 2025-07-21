@@ -16,18 +16,20 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'pnpm'
+          # ❌ Removed: cache: 'pnpm' (this was causing the issue)
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9.0.0
+          run_install: false  # Prevents auto-install, we'll install manually
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Run build
         run: pnpm dlx turbo run build
+
 
 
 
