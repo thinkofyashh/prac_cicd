@@ -19,8 +19,8 @@ jobs:
       - name: 🔐 Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: 🛠️ Build and push Docker image
         uses: docker/build-push-action@v5
@@ -28,6 +28,6 @@ jobs:
           context: .
           file: ./docker/Dockerfile.web
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/prac_ci_cd:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/prac_ci_cd:latest
 
 
