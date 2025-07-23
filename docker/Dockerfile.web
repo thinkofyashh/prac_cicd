@@ -1,0 +1,21 @@
+FROM node:20-alpine
+
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+
+WORKDIR /app
+
+COPY package.json .
+COPY pnpm-lock.yaml .
+COPY turbo.json .
+COPY pnpm-workspace.yaml .
+
+COPY apps ./apps
+COPY packages ./packages
+
+RUN pnpm install
+
+RUN pnpm run db:generate
+
+RUN pnpm run build
+
+CMD ["pnpm", "run", "start_web"]
